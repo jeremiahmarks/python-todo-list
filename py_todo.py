@@ -1,4 +1,5 @@
 #!/usr/bin/python
+"""Program to create, delete, and edit a todo list""" 
 import time
 import datetime
 import cPickle
@@ -161,7 +162,7 @@ def edit_todo():
                 if response == 'y':
                     edit_todo()
                 else:
-                    menu()
+                    main()
             elif new_value == 't':
                 hr = get_integer(raw_input,'\nEnter Hour (24h): ')
                 mn = get_integer(raw_input,'Enter Minute (01-59): ')
@@ -177,7 +178,7 @@ def edit_todo():
                 if response == 'y':
                     edit_todo()
                 else:
-                    menu()
+                    main()
             else:
                 print 'big time error'
     except KeyError, e:
@@ -188,30 +189,31 @@ def menu():
     print '''
     Todo List
     
-    Press I: Get Info
-    Press A: Add Todo
-    Press D: Remove Todo
-    Press E: Edit Todo
-    Press X: Exit
+    Enter I: Show Current List
+    Enter A: Add Todo
+    Enter D: Remove Todo
+    Enter E: Edit Todo
+    Enter X: Exit 
     '''
     answer = raw_input('\nEnter > ')
     answer = answer.lower()
     if answer == 'a':
         add_todo()
-        menu()
+        main()
     elif answer == 'i':
         main()
     elif answer == 'd':
         del_todo()
-        menu()
+        main()
     elif answer == 'e':
         edit_todo()
-        menu()
+        main()
     elif answer == 'x':
         print 'Goodbye'
         exit()
     else:
-        print 'Goodbye'
+        print '\nPlease enter an option!'
+        main()
 
 if __name__ == '__main__':
     main()

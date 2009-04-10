@@ -9,9 +9,10 @@ class BadUserError(Exception):
     pass
 
 def get_integer(retrieve,question,attempts=3):
+    """Test for integer input, three attempts allowed"""
     while attempts > 0:
         num = retrieve(question)
-        try: # check if the user input is an integer
+        try: 
             return int(num)
         except ValueError:
             print "Opps, You must enter a number!"
@@ -19,6 +20,7 @@ def get_integer(retrieve,question,attempts=3):
     raise BadUserError("Too many incorrect attempts!")
 
 def main():
+    """Starts the program, loads data from disk, prints current todo's"""
     print '\nYour current Todo list is: \n'
     if os.path.exists('todo.dat'):
         try:
@@ -36,6 +38,7 @@ def main():
         menu()
 
 def add_todo():
+    """Add a todo to the todo list"""
     if os.path.exists('todo.dat'):
         try:
             fname = open('todo.dat', 'rb')
@@ -75,12 +78,14 @@ def add_todo():
         print '\nError! Please enter the Todo you want to add.\n'
 
 def save_todo(todo):
+    """Save todo list to disk"""
     fname = open('todo.dat', 'w')
     object = cPickle.Pickler(fname)
     object.dump(todo)
     fname.close()
 
 def del_todo():
+    """Delete a todo"""
     if os.path.exists('todo.dat'):
         try:
             fname = open('todo.dat', 'rb')
@@ -108,6 +113,7 @@ def del_todo():
         print 'Case and spaces are important.'
 
 def edit_todo():
+    """Edit the date and time for a todo"""
     if os.path.exists('todo.dat'):
         try:
             fname = open('todo.dat', 'rb')
